@@ -1,0 +1,9 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+
+WORKDIR /tmp
+RUN dotnet dev-certs https
+
+COPY ./docker/command.dev.sh .
+
+WORKDIR /opt/app
+

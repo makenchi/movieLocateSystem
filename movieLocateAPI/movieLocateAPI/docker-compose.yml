@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  movie-locate-api:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dev
+    container_name: movieLocateAPI
+    volumes:
+      - './:/opt/app/'
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    expose: 
+      - 8000
+    command: "bash /tmp/command.dev.sh"
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "db123!"
+      MYSQL_DATABASE: "movie-locate"
+      MYSQL_USER: "movie-locate-api"
+      MYSQL_PASSWORD: "dev123!"
+    ports:
+      - "3306:3306"
